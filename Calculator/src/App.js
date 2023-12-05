@@ -4,23 +4,76 @@ import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
-    onButtonClick(btnText){
+    constructor(props) {
+        super(props);
+        this.state = { 
+            text: 50,
+            title: "Calculator"
+        };
+        this.buttons = [
+            "C",
+            "7",
+            "8",
+            "9",
+            "+",
+            "4",
+            "5",
+            "6",
+            "-",
+            "1",
+            "2",
+            "3",
+            "*",
+            "0",
+            ".",
+            "=",
+            "/",
+        ];
+
+        this.allowedCharacters = this.buttons.filter(i => i != "C");
+    }
+
+    onButtonClick(btnText) {
         console.log(`Hello ${btnText}`);
-        if (btnText === '+') {
+        if (btnText === "+") {
             this.onPlusClick();
+        }
+        if (btnText === "-") {
+            this.onMinusClick();
+        }
+        if(btnText === "C") {
+            this.onClearClick();
         }
     }
 
-    onPlusClick(){
+    onClearClick(){
+        console.log(`I clicked C`);
+        this.setState({
+            text: 0
+        });
+    }
+
+    onPlusClick() {
         console.log(`I clicked plus`);
     }
 
-    render() {
-        const buttons = [
-            "C", "7", "8", "9", "+", "4", "5", "6", "-", "1", "2", "3", "*", "0", ".", "=", "/"
-        ];
+    onMinusClick() {
+        console.log(`I clicked minus`);
+    }
 
-        const buttonList = buttons.map((i) => (
+    onInputChange(event){
+        var newText = event.target.value;
+        var lastCharacter = newText.slice(-1);
+        var hasInvalidCharacter = this.allowedCharacters.indexOf(lastCharacter) == -1;
+        if (!hasInvalidCharacter){
+            this.setState({
+                text: newText,
+            });
+        }
+    }
+
+    render() {
+        const buttonList = this.buttons.map((i) => (
             <button
                 onClick={() => this.onButtonClick(i)}
                 className="btn bg-light text-dark"
@@ -37,7 +90,7 @@ class App extends React.Component {
                 >
                     <div className="container-fluid container-xxl mt-5 card w-50">
                         <h3 className="text-center text-dark fw-bold fs-1">
-                            Calculator
+                            {this.state.title}
                         </h3>
                         <div className="mt-3 container-fluid container-xxl w-50">
                             <div className="calculator">
@@ -45,7 +98,8 @@ class App extends React.Component {
                                     type="text"
                                     className="form-control"
                                     id="display"
-                                    readonly
+                                    onChange={(e) => this.onInputChange(e)}
+                                    value={this.state.text}
                                 />
                                 <div className="buttons">{buttonList}</div>
                             </div>

@@ -7,7 +7,7 @@ function TaskList() {
             <div className="task-list">
                 <div className="task-wrap">
                     <div
-                        className="task-container eNQpWc"
+                        className="task-container"
                         aria-label="Types Search Filters"
                         tabindex="0"
                     >
@@ -20,54 +20,86 @@ function TaskList() {
                             aria-expanded="true"
                         >
                             <div
-                                className="tasks-item yOOK0-rTEl-zyxPWd"
+                                className="tasks-item task-reminders"
                                 tabindex="0"
                                 role="option"
                             >
-                                <div className="x5ghY-MJoBVe-yOOK0-haAclf">
+                                <div className="task">
                                     <div className="tasks-bg"></div>
-                                    <div className="x5ghY-MJoBVe-yOOK0-V67aGc">
-                                        Reminders
-                                    </div>
+                                    <div className="task-text">Reminders</div>
                                 </div>
                             </div>
                             <div
-                                className="tasks-item yOOK0-rTEl-rymPhb JbbQac-AHmuwe-i5vt6e"
+                                className="tasks-item task-lists"
                                 tabindex="0"
                                 role="option"
                             >
-                                <div className="x5ghY-MJoBVe-yOOK0-haAclf">
+                                <div className="task">
                                     <div className="tasks-bg"></div>
-                                    <div className="x5ghY-MJoBVe-yOOK0-V67aGc">
-                                        Lists
-                                    </div>
+                                    <div className="task-text">Lists</div>
                                 </div>
                             </div>
                             <div
-                                className="tasks-item yOOK0-rTEl-HiaYvf"
+                                className="tasks-item task-images"
                                 tabindex="0"
                                 role="option"
                             >
-                                <div className="x5ghY-MJoBVe-yOOK0-haAclf">
+                                <div className="task">
                                     <div className="tasks-bg"></div>
-                                    <div className="x5ghY-MJoBVe-yOOK0-V67aGc">
-                                        Images
-                                    </div>
+                                    <div className="task-text">Images</div>
                                 </div>
                             </div>
                             <div
-                                className="tasks-item yOOK0-rTEl-dZ8yzd JbbQac-AHmuwe-i5vt6e"
+                                className="tasks-item task-urls"
                                 tabindex="0"
                                 role="option"
                             >
-                                <div className="x5ghY-MJoBVe-yOOK0-haAclf">
+                                <div className="task">
                                     <div className="tasks-bg"></div>
-                                    <div className="x5ghY-MJoBVe-yOOK0-V67aGc">
-                                        URLs
-                                    </div>
+                                    <div className="task-text">URLs</div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <div className="notes-wrap">
+                    <div className="notes-container">
+                        <div
+                            role="button"
+                            className="select-item"
+                            data-tooltip-text="Select note"
+                            aria-label="Select note"
+                            aria-disabled="false"
+                            tabindex="0"
+                        ></div>
+
+                        <div
+                            role="button"
+                            className="Q0hgme-LgbsSe Q0hgme-Bz112c-LgbsSe RmniWd-rymPhb VIpgJd-LgbsSe"
+                            data-tooltip-text="New list"
+                            aria-label="New list"
+                            aria-disabled="false"
+                            tabindex="0"
+                        ></div>
+
+                        <div
+                            role="button"
+                            className="Q0hgme-LgbsSe Q0hgme-Bz112c-LgbsSe RmniWd-nA1mMd-h1U9Be VIpgJd-LgbsSe"
+                            data-tooltip-text="New note with drawing"
+                            aria-label="New note with drawing"
+                            aria-disabled="false"
+                            tabindex="0"
+                        ></div>
+
+                        <div
+                            role="button"
+                            className="Q0hgme-LgbsSe Q0hgme-Bz112c-LgbsSe RmniWd-HiaYvf-h1U9Be VIpgJd-LgbsSe"
+                            data-tooltip-text="New note with image"
+                            aria-label="New note with image"
+                            aria-disabled="false"
+                            tabindex="0"
+                        ></div>
                     </div>
                 </div>
             </div>

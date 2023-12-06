@@ -1,26 +1,11 @@
 body {
-    background-color: #fff;
-    color: #202124;
+    min-width: 360px;
     font-family: "Roboto", arial, sans-serif;
     font-size: 15px;
     margin: 0;
-    min-width: 360px;
     overflow-x: hidden;
     overflow-y: auto;
     padding: 0;
-}
-
-.notes-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    position: relative;
-    clear: both;
+    color: #202124;
     background-color: #f1f3f4;
-}
-
-.notes-wrapper {
-    display: flex;
-    flex-direction: row;
-    height: calc(100% - 64px);
 }

@@ -76,7 +76,7 @@ function TaskList() {
 
                         <div
                             role="button"
-                            className="Q0hgme-LgbsSe Q0hgme-Bz112c-LgbsSe RmniWd-rymPhb VIpgJd-LgbsSe"
+                            className="create-notes new-list"
                             data-tooltip-text="New list"
                             aria-label="New list"
                             aria-disabled="false"
@@ -85,7 +85,7 @@ function TaskList() {
 
                         <div
                             role="button"
-                            className="Q0hgme-LgbsSe Q0hgme-Bz112c-LgbsSe RmniWd-nA1mMd-h1U9Be VIpgJd-LgbsSe"
+                            className="create-notes new-draw"
                             data-tooltip-text="New note with drawing"
                             aria-label="New note with drawing"
                             aria-disabled="false"
@@ -94,7 +94,7 @@ function TaskList() {
 
                         <div
                             role="button"
-                            className="Q0hgme-LgbsSe Q0hgme-Bz112c-LgbsSe RmniWd-HiaYvf-h1U9Be VIpgJd-LgbsSe"
+                            className="create-notes new-image"
                             data-tooltip-text="New note with image"
                             aria-label="New note with image"
                             aria-disabled="false"

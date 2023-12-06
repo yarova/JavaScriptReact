@@ -35,15 +35,25 @@ class App extends React.Component {
 
     onButtonClick(btnText) {
         console.log(`Hello ${btnText}`);
-        if (btnText === "+") {
-            this.onPlusClick();
-        }
-        if (btnText === "-") {
-            this.onMinusClick();
+        if (btnText === "=") {
+            this.onEqualClick();
+            return;
         }
         if(btnText === "C") {
             this.onClearClick();
+            return;
         }
+        this.setState({
+            text: this.state.text + btnText
+        });
+    }
+
+    onEqualClick(){
+        console.log("EqualClick");
+        var result = eval(this.state.text);
+        this.setState({
+            text: result,
+        });
     }
 
     onClearClick(){
@@ -53,22 +63,24 @@ class App extends React.Component {
         });
     }
 
-    onPlusClick() {
-        console.log(`I clicked plus`);
-    }
-
-    onMinusClick() {
-        console.log(`I clicked minus`);
-    }
-
     onInputChange(event){
         var newText = event.target.value;
         var lastCharacter = newText.slice(-1);
         var hasInvalidCharacter = this.allowedCharacters.indexOf(lastCharacter) == -1;
+
         if (!hasInvalidCharacter){
-            this.setState({
-                text: newText,
-            });
+            this.setState({ text: this.ensureHasSingleOperation(newText) });
+        }
+    }
+
+    ensureHasSingleOperation(text){
+        var lastCharacter = text.slice(-1);
+        var lastTwoCharacters = text.slice(-2);
+        var hasNumbers = lastTwoCharacters.match(/^([^0-9]*)$/) == null;
+        if (hasNumbers) {
+            return text;
+        } else {
+            return text.slice(0, -2) + lastCharacter;
         }
     }
 

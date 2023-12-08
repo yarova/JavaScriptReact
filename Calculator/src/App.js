@@ -1,14 +1,15 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import MathUtils from "./MathUtils";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-            text: 50,
-            title: "Calculator"
+        this.state = {
+            text: 0,
+            title: "Calculator",
         };
         this.buttons = [
             "C",
@@ -30,58 +31,45 @@ class App extends React.Component {
             "/",
         ];
 
-        this.allowedCharacters = this.buttons.filter(i => i != "C");
+        this.allowedCharacters = this.buttons.filter((i) => i != "C");
+    }
+
+    onEqualClick() {
+        var result = eval(this.state.text);
+        this.setState({ text: result });
+    }
+
+    onClearClick() {
+        this.setState({ text: 0 });
+    }
+
+    onKeyDown(event){
+        if (event.key === "Enter") {
+            this.onEqualClick();
+        }
     }
 
     onButtonClick(btnText) {
         console.log(`Hello ${btnText}`);
         if (btnText === "=") {
             this.onEqualClick();
-            return;
-        }
-        if(btnText === "C") {
+        } else if (btnText === "C") {
             this.onClearClick();
-            return;
+        } else {
+            var newText = this.state.text + btnText;
+            this.setState({ text: MathUtils.validateAndCorrectEquation(newText) });
         }
-        this.setState({
-            text: this.state.text + btnText
-        });
     }
 
-    onEqualClick(){
-        console.log("EqualClick");
-        var result = eval(this.state.text);
-        this.setState({
-            text: result,
-        });
-    }
-
-    onClearClick(){
-        console.log(`I clicked C`);
-        this.setState({
-            text: 0
-        });
-    }
-
-    onInputChange(event){
+    onInputChange(event) {
         var newText = event.target.value;
         var lastCharacter = newText.slice(-1);
         var hasInvalidCharacter = this.allowedCharacters.indexOf(lastCharacter) == -1;
-
-        if (!hasInvalidCharacter){
-            this.setState({ text: this.ensureHasSingleOperation(newText) });
+        if (hasInvalidCharacter) {
+            return;
         }
-    }
 
-    ensureHasSingleOperation(text){
-        var lastCharacter = text.slice(-1);
-        var lastTwoCharacters = text.slice(-2);
-        var hasNumbers = lastTwoCharacters.match(/^([^0-9]*)$/) == null;
-        if (hasNumbers) {
-            return text;
-        } else {
-            return text.slice(0, -2) + lastCharacter;
-        }
+        this.setState({ text: MathUtils.validateAndCorrectEquation(newText) });
     }
 
     render() {
@@ -89,6 +77,7 @@ class App extends React.Component {
             <button
                 onClick={() => this.onButtonClick(i)}
                 className="btn bg-light text-dark"
+                key={i}
             >
                 {i}
             </button>
@@ -110,6 +99,7 @@ class App extends React.Component {
                                     type="text"
                                     className="form-control"
                                     id="display"
+                                    onKeyDown={(e) => this.onKeyDown(e)}
                                     onChange={(e) => this.onInputChange(e)}
                                     value={this.state.text}
                                 />

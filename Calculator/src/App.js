@@ -10,6 +10,7 @@ class App extends React.Component {
         this.state = {
             text: 0,
             title: "Calculator",
+            mode: "light"
         };
         this.buttons = [
             "C",
@@ -32,6 +33,10 @@ class App extends React.Component {
         ];
 
         this.allowedCharacters = this.buttons.filter((i) => i != "C");
+    }
+
+    onModeClick(mode){
+        this.setState({ mode: mode });
     }
 
     onEqualClick() {
@@ -84,12 +89,31 @@ class App extends React.Component {
         ));
 
         return (
-            <div className="container-fluid container-xxl mt-5">
+            <div
+                className={`container-fluid container-xxl pt-5 ${this.state.mode}-mode`}
+            >
                 <div
                     className="w-100"
                     style={{ height: 600, borderRadius: 24 }}
                 >
                     <div className="container-fluid container-xxl mt-5 card w-50">
+                        <div className="btn-group" role="group">
+                            <button
+                                type="button"
+                                className={`btn ${this.state.mode == "light" ? "active" : ""}`}
+                                onClick={() => this.onModeClick("light")}
+                            >
+                                Light
+                            </button>
+                            <button
+                                type="button"
+                                className={`btn ${this.state.mode == "dark" ? "active" : ""}`}
+                                onClick={() => this.onModeClick("dark")}
+                            >
+                                Dark
+                            </button>
+                        </div>
+
                         <h3 className="text-center text-dark fw-bold fs-1">
                             {this.state.title}
                         </h3>

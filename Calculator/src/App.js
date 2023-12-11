@@ -10,7 +10,7 @@ class App extends React.Component {
         this.state = {
             text: 0,
             title: "Calculator",
-            mode: "light"
+            mode: "light",
         };
         this.buttons = [
             "C",
@@ -35,7 +35,7 @@ class App extends React.Component {
         this.allowedCharacters = this.buttons.filter((i) => i != "C");
     }
 
-    onModeClick(mode){
+    onModeClick(mode) {
         this.setState({ mode: mode });
     }
 
@@ -48,7 +48,7 @@ class App extends React.Component {
         this.setState({ text: 0 });
     }
 
-    onKeyDown(event){
+    onKeyDown(event) {
         if (event.key === "Enter") {
             this.onEqualClick();
         }
@@ -62,19 +62,24 @@ class App extends React.Component {
             this.onClearClick();
         } else {
             var newText = this.state.text + btnText;
-            this.setState({ text: MathUtils.validateAndCorrectEquation(newText) });
+            this.setState({
+                text: MathUtils.validateAndCorrectEquation(newText),
+            });
         }
     }
 
     onInputChange(event) {
         var newText = event.target.value;
         var lastCharacter = newText.slice(-1);
-        var hasValidCharacter = this.allowedCharacters.indexOf(lastCharacter) !== -1;
+        var hasValidCharacter =
+            this.allowedCharacters.indexOf(lastCharacter) !== -1;
         var isEmptyString = lastCharacter == "";
         var shouldUpdate = hasValidCharacter || isEmptyString;
 
         if (shouldUpdate) {
-            this.setState({ text: MathUtils.validateAndCorrectEquation(newText) });
+            this.setState({
+                text: MathUtils.validateAndCorrectEquation(newText),
+            });
         }
     }
 
@@ -98,17 +103,33 @@ class App extends React.Component {
                     style={{ height: 600, borderRadius: 24 }}
                 >
                     <div className="container-fluid container-xxl mt-5 card w-50">
+                        <div className="form-check form-switch">
+                            <input
+                                className="form-check-input"
+                                type="checkbox"
+                                id="flexSwitchCheckDefault"
+                            />
+                            <label
+                                className="form-check-label"
+                                for="flexSwitchCheckDefault"
+                            ></label>
+                        </div>
+
                         <div className="btn-group" role="group">
                             <button
                                 type="button"
-                                className={`btn ${this.state.mode == "light" ? "active" : ""}`}
+                                className={`btn ${
+                                    this.state.mode == "light" ? "active" : ""
+                                }`}
                                 onClick={() => this.onModeClick("light")}
                             >
                                 Light
                             </button>
                             <button
                                 type="button"
-                                className={`btn ${this.state.mode == "dark" ? "active" : ""}`}
+                                className={`btn ${
+                                    this.state.mode == "dark" ? "active" : ""
+                                }`}
                                 onClick={() => this.onModeClick("dark")}
                             >
                                 Dark

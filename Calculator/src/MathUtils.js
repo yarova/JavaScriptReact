@@ -1,4 +1,3 @@
-
 class MathUtils {
     validateAndCorrectEquation(equation) {
         var correctedEquation = this.ensureHasSingleOperation(equation);
@@ -29,13 +28,13 @@ class MathUtils {
         }
     }
 
-    calculateIfHasEqualSign(text){
+    calculateIfHasEqualSign(text) {
         //TODO: calculate result if last character is "="
         var lastCharacter = text.slice(-1);
-        if (lastCharacter == '=') {
+        if (lastCharacter == "=") {
             text = `${eval(text.slice(0, -1)).toString()}`;
         }
-        
+
         return text;
     }
 }

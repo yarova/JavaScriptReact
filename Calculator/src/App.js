@@ -69,12 +69,13 @@ class App extends React.Component {
     onInputChange(event) {
         var newText = event.target.value;
         var lastCharacter = newText.slice(-1);
-        var hasInvalidCharacter = this.allowedCharacters.indexOf(lastCharacter) == -1;
-        if (hasInvalidCharacter) {
-            return;
-        }
+        var hasValidCharacter = this.allowedCharacters.indexOf(lastCharacter) !== -1;
+        var isEmptyString = lastCharacter == "";
+        var shouldUpdate = hasValidCharacter || isEmptyString;
 
-        this.setState({ text: MathUtils.validateAndCorrectEquation(newText) });
+        if (shouldUpdate) {
+            this.setState({ text: MathUtils.validateAndCorrectEquation(newText) });
+        }
     }
 
     render() {

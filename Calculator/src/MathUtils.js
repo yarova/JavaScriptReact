@@ -3,6 +3,7 @@ class MathUtils {
     validateAndCorrectEquation(equation) {
         var correctedEquation = this.ensureHasSingleOperation(equation);
         correctedEquation = this.removeBeginningZero(correctedEquation);
+        correctedEquation = this.calculateIfHasEqualSign(correctedEquation);
         return correctedEquation;
     }
 
@@ -26,6 +27,16 @@ class MathUtils {
         } else {
             return text.slice(0, -2) + lastCharacter;
         }
+    }
+
+    calculateIfHasEqualSign(text){
+        //TODO: calculate result if last character is "="
+        var lastCharacter = text.slice(-1);
+        if (lastCharacter == '=') {
+            text = `${eval(text.slice(0, -1)).toString()}`;
+        }
+        
+        return text;
     }
 }
 

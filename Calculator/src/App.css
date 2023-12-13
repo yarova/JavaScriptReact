@@ -1,3 +1,7 @@
+body {
+    user-select: none;
+}
+
 .calculator {
     width: 250px;
     margin: 0 auto;
@@ -23,10 +27,100 @@ button {
     font-size: 20px;
 }
 
-.light-mode {
+.w-100 .card {
+    background: transparent;
+}
 
+.light-mode,
+.dark-mode {
+    min-height: 100vh;
+}
+
+.light-mode {
+    color: #444;
+    background-color: #f4f4f4;
 }
 
 .dark-mode {
-    
+    color: #fff;
+    background-color: #183450;
+}
+
+.light-mode h3 {
+    color: #444;
+}
+
+.dark-mode h3 {
+    color: #fff;
+}
+
+.btn.btn-calc {
+    font-size: 0.8rem;
+    font-weight: 100;
+}
+
+.dark-mode .btn-calc,
+.dark-mode .btn-calc:hover,
+.dark-mode .btn.btn-calc:active,
+.dark-mode .form-control,
+.dark-mode .form-control:focus {
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.light-mode .btn-calc,
+.light-mode .btn-calc:hover,
+.light-mode .btn.btn-calc:active,
+.light-mode .form-control,
+.light-mode .form-control:focus {
+    color: #444;
+    border: 1px solid #c9c9c9;
+    background: rgba(68, 68, 68, 0.01);
+}
+
+.dark-mode .btn-calc:hover {
+    color: #fff;
+}
+
+.btn:focus,
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.dark-mode .card {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.mode-form {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+}
+
+.mode-form .form-switch .form-check-input {
+    width: 3em;
+    height: 1.5em;
+}
+
+.mode-form .form-switch .form-check-input:focus {
+    box-shadow: none;
+}
+
+.mode-form .form-switch .form-check-input:active {
+    filter: none;
+}
+
+.dark-mode .form-switch .form-check-input:checked {
+    background-color: #1a354f;
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.light-mode .form-switch .form-check-input {
+    border-color: #c9c9c9;
+}
+
+.light-mode .form-check-input:focus {
+    background-image: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%27-4 -4 8 8%27%3e%3ccircle r=%273%27 fill=%27rgba%280, 0, 0, 0.25%29%27/%3e%3c/svg%3e");
+    background-position: left center;
 }

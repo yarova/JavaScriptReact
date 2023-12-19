@@ -1,24 +1,117 @@
+import React from "react";
 import "./App.css";
+import currencies from "./currencies";
+import currencyApiClient from "./currencyApiClient.js";
 //https://codepen.io/dsr/pen/VwxZKZB
 
-function App() {
-    return (
-        <div className="currency-converter">
-            <div className="currency-form currency-from">
-                <input type="text" value="1" />
-                <select>
-                    <option>USD</option>
-                </select>
+class App extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            sourceCurrencyCode: "EUR",
+            destinationCurrencyCode: "UAH",
+            sourceAmount: 5,
+            destinationAmount: 10,
+        };
+    }
+
+    onSourceCurrencyChange(event) {
+        this.setState(
+            { sourceCurrencyCode: event.target.value },
+            this.calculateDestination
+        );
+    }
+
+    onSourceAmountChange(event) {
+        this.setState(
+            { sourceAmount: parseInt(event.target.value) },
+            this.calculateDestination
+        );
+    }
+
+    onDestinationCurrencyChange(event) {
+        this.setState(
+            { destinationCurrencyCode: event.target.value },
+            this.calculateSource
+        );
+    }
+
+    onDestinationAmountChange(event) {
+        this.setState(
+            { destinationAmount: parseInt(event.target.value) },
+            this.calculateSource
+        );
+    }
+
+    calculateSource() {
+        console.log(
+            `calculating source amount in ${this.state.sourceCurrencyCode} from ${this.state.destinationAmount} ${this.state.destinationCurrencyCode}`
+        );
+        var exchangeRate = currencyApiClient.getExchangeRate(
+            this.state.sourceCurrencyCode,
+            this.state.destinationCurrencyCode
+        );
+
+        var sourceAmount = this.state.destinationAmount / exchangeRate;
+        this.setState({ sourceAmount: sourceAmount });
+    }
+
+    calculateDestination() {
+        console.log(
+            `calculating destination amount in ${this.state.destinationCurrencyCode} from ${this.state.sourceAmount} ${this.state.sourceCurrencyCode}`
+        );
+        var exchangeRate = currencyApiClient.getExchangeRate(
+            this.state.sourceCurrencyCode,
+            this.state.destinationCurrencyCode
+        );
+
+        var destinationAmount = this.state.sourceAmount * exchangeRate;
+        this.setState({ destinationAmount: destinationAmount });
+    }
+
+    render() {
+        var xx = currencies;
+
+        return (
+            <div className="currency-converter">
+                <div className="currency-form currency-from">
+                    <input
+                        type="text"
+                        value={this.state.sourceAmount}
+                        onChange={(e) => this.onSourceAmountChange(e)}
+                    />
+                    <select
+                        onChange={(e) => this.onSourceCurrencyChange(e)}
+                        value={this.state.sourceCurrencyCode}
+                    >
+                        {Object.entries(xx).map(([key, value]) => (
+                            <option key={key} value={key}>
+                                {value}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div className="eq">=</div>
+                <div className="currency-form currency-to">
+                    <input
+                        type="text"
+                        value={this.state.destinationAmount}
+                        onChange={(e) => this.onDestinationAmountChange(e)}
+                    />
+                    <select
+                        onChange={(e) => this.onDestinationCurrencyChange(e)}
+                        value={this.state.destinationCurrencyCode}
+                    >
+                        {Object.entries(xx).map(([key, value]) => (
+                            <option key={key} value={key}>
+                                {value}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
-            <div className="eq">=</div>
-            <div className="currency-form currency-to">
-                <input type="text" value="" />
-                <select>
-                    <option>INR</option>
-                </select>
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default App;

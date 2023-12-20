@@ -6,7 +6,7 @@
 
 body {
     font-family: "Roboto", sans-serif;
-    background: #e9d575;
+    background: #713b9a;
 }
 
 .currency-converter {
@@ -21,12 +21,10 @@ body {
 
 .currency-converter .currency-form {
     width: 200px;
-    border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
     padding: 0px 10px;
     background: #fff;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.25);
 }
 
 .currency-converter .currency-form input {

@@ -43,29 +43,33 @@ class App extends React.Component {
         );
     }
 
-    calculateSource() {
+    async calculateSource() {
         console.log(
             `calculating source amount in ${this.state.sourceCurrencyCode} from ${this.state.destinationAmount} ${this.state.destinationCurrencyCode}`
         );
-        var exchangeRate = currencyApiClient.getExchangeRate(
+        var exchangeRate = await currencyApiClient.getExchangeRate(
             this.state.sourceCurrencyCode,
             this.state.destinationCurrencyCode
         );
 
         var sourceAmount = this.state.destinationAmount / exchangeRate;
+        sourceAmount = parseFloat(sourceAmount.toFixed(2));
+
         this.setState({ sourceAmount: sourceAmount });
     }
 
-    calculateDestination() {
+    async calculateDestination() {
         console.log(
             `calculating destination amount in ${this.state.destinationCurrencyCode} from ${this.state.sourceAmount} ${this.state.sourceCurrencyCode}`
         );
-        var exchangeRate = currencyApiClient.getExchangeRate(
+        var exchangeRate = await currencyApiClient.getExchangeRate(
             this.state.sourceCurrencyCode,
             this.state.destinationCurrencyCode
         );
 
         var destinationAmount = this.state.sourceAmount * exchangeRate;
+        destinationAmount = parseFloat(destinationAmount.toFixed(2));
+
         this.setState({ destinationAmount: destinationAmount });
     }
 
